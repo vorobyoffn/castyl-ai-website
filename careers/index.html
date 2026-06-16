@@ -185,6 +185,30 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(70px,10vw,120px);pa
 .rocket .tip{position:absolute;right:50px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:"JetBrains Mono";font-size:10px;letter-spacing:.04em;color:var(--muted);background:rgba(8,9,14,.82);border:1px solid var(--hairline);border-radius:7px;padding:4px 9px;opacity:0;transition:opacity .25s;pointer-events:none}
 .rocket:hover .tip{opacity:1}
 @media(max-width:760px){.rocket-wrap{display:none}}
+
+/* Apply dialog — guaranteed fallback so every Apply click yields a draft */
+.apply-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.apply-modal.open{display:flex}
+.apply-backdrop{position:absolute;inset:0;background:rgba(4,5,8,.72);backdrop-filter:blur(8px) saturate(120%);-webkit-backdrop-filter:blur(8px) saturate(120%);animation:apf .3s var(--ease)}
+@keyframes apf{from{opacity:0}to{opacity:1}}
+.apply-card{position:relative;width:min(540px,100%);max-height:88vh;overflow:auto;background:linear-gradient(180deg,#12151F,#0C0E14);border:1px solid var(--hairline-strong);border-radius:var(--r-lg);padding:30px 30px 24px;box-shadow:0 30px 90px rgba(0,0,0,.6);animation:apc .42s var(--ease)}
+.apply-card::before{content:"";position:absolute;inset:0;border-radius:var(--r-lg);padding:1px;background:var(--grad-tri);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.5;pointer-events:none}
+@keyframes apc{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+.apply-x{position:absolute;top:14px;right:15px;width:34px;height:34px;border-radius:9px;background:var(--glass);border:1px solid var(--hairline);color:var(--muted);font-size:20px;line-height:1;cursor:pointer;transition:.25s var(--ease)}
+.apply-x:hover{color:var(--ink);border-color:var(--hairline-strong);transform:rotate(90deg)}
+.apply-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:11px}
+.apply-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--grad);box-shadow:0 0 10px var(--cyan)}
+.apply-card h3{font-family:'Space Grotesk',sans-serif;font-size:23px;margin:0 0 8px;letter-spacing:-.01em;color:var(--ink)}
+.apply-lead{font-size:14px;color:var(--muted);line-height:1.55;margin:0 0 17px}
+.apply-lead b{color:var(--ink);font-weight:600}
+.apply-preview{background:var(--void);border:1px solid var(--hairline);border-radius:13px;padding:13px 15px;margin-bottom:18px}
+.apply-subj{font-size:12.5px;color:var(--cyan);font-weight:600;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--hairline)}
+.apply-body{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:1.62;color:var(--muted);white-space:pre-wrap;margin:0;max-height:172px;overflow:auto}
+.apply-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:13px}
+.apply-actions .btn{flex:1 1 150px}
+.apply-copyaddr{display:block;width:100%;text-align:center;background:none;border:none;color:var(--muted-2);font-size:12.5px;cursor:pointer;padding:5px;transition:.2s;font-family:inherit}
+.apply-copyaddr:hover{color:var(--ink)}
+.apply-copyaddr.copied,.apply-actions .btn-ghost.copied{color:var(--cyan)}
 </style>
 </head>
 <body>
@@ -503,6 +527,27 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(70px,10vw,120px);pa
   </div>
 </footer>
 
+<!-- Apply dialog: guaranteed fallback so every Apply click yields a ready-to-send draft -->
+<div class="apply-modal" id="apply-modal" role="dialog" aria-modal="true" aria-labelledby="apply-modal-title" aria-hidden="true">
+  <div class="apply-backdrop" data-close></div>
+  <div class="apply-card">
+    <button class="apply-x" type="button" data-close aria-label="Close">&times;</button>
+    <span class="apply-eyebrow"><span class="dot"></span> <span id="apply-role-label">Apply</span></span>
+    <h3 id="apply-modal-title">Send your application</h3>
+    <p class="apply-lead">Email <b id="apply-to">nikita@castyl.ai</b> with the details below — and <b>attach your CV/resume</b>. Pick whichever is easiest:</p>
+    <div class="apply-preview">
+      <div class="apply-subj" id="apply-subj"></div>
+      <pre class="apply-body" id="apply-body"></pre>
+    </div>
+    <div class="apply-actions">
+      <a class="btn btn-primary" id="apply-mailto" href="mailto:nikita@castyl.ai">Open in email app <span class="arr">→</span></a>
+      <a class="btn btn-ghost" id="apply-gmail" href="#" target="_blank" rel="noopener">Open in Gmail</a>
+      <button class="btn btn-ghost" id="apply-copy" type="button">Copy message</button>
+    </div>
+    <button class="apply-copyaddr" id="apply-copyaddr" type="button">Copy email address</button>
+  </div>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -550,11 +595,64 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(70px,10vw,120px);pa
       "- Earliest start date & availability:\n\n" +
       "I've attached my CV/resume.\n\nThanks!\n";
   }
-  document.querySelectorAll(".apply-link").forEach(function(a){
-    var role=a.getAttribute("data-role")||"";
-    var subj=role ? "Application: "+role+" - Castyl Summer 2026" : "Internship application - Castyl Summer 2026";
-    a.setAttribute("href","mailto:nikita@castyl.ai?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(appBody(role)));
-  });
+  (function(){
+    var TO="nikita@castyl.ai";
+    var modal=document.getElementById("apply-modal"),
+        elRole=document.getElementById("apply-role-label"),
+        elSubj=document.getElementById("apply-subj"),
+        elBody=document.getElementById("apply-body"),
+        aMail=document.getElementById("apply-mailto"),
+        aGmail=document.getElementById("apply-gmail"),
+        bCopy=document.getElementById("apply-copy"),
+        bAddr=document.getElementById("apply-copyaddr");
+
+    function meta(role){
+      var subj=role ? "Application: "+role+" - Castyl Summer 2026" : "Internship application - Castyl Summer 2026";
+      var body=appBody(role);
+      return {subj:subj, body:body,
+        mailto:"mailto:"+TO+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body),
+        gmail:"https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(TO)+"&su="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body)};
+    }
+    function flash(btn,txt){var o=btn.getAttribute("data-label")||btn.textContent;btn.setAttribute("data-label",o);btn.textContent=txt;btn.classList.add("copied");clearTimeout(btn._t);btn._t=setTimeout(function(){btn.textContent=o;btn.classList.remove("copied");},1600);}
+    function fallbackCopy(text){var t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.top="-9999px";document.body.appendChild(t);t.focus();t.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(t);}
+    function copy(text,btn,label){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){flash(btn,label);},function(){fallbackCopy(text);flash(btn,label);});}else{fallbackCopy(text);flash(btn,label);}}
+
+    var current=meta("");
+    function openModal(role){
+      current=meta(role);
+      if(elRole)elRole.textContent=role?role:"Open application";
+      if(elSubj)elSubj.textContent=current.subj;
+      if(elBody)elBody.textContent=current.body;
+      if(aMail)aMail.setAttribute("href",current.mailto);
+      if(aGmail)aGmail.setAttribute("href",current.gmail);
+      if(modal){modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.documentElement.style.overflow="hidden";}
+    }
+    function closeModal(){if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.documentElement.style.overflow="";}}
+
+    if(modal){
+      modal.querySelectorAll("[data-close]").forEach(function(el){el.addEventListener("click",closeModal);});
+      document.addEventListener("keydown",function(e){if(e.key==="Escape"&&modal.classList.contains("open"))closeModal();});
+      if(bCopy)bCopy.addEventListener("click",function(){copy("To: "+TO+"\nSubject: "+current.subj+"\n\n"+current.body,bCopy,"Copied ✓");});
+      if(bAddr)bAddr.addEventListener("click",function(){copy(TO,bAddr,"Copied "+TO+" ✓");});
+    }
+
+    document.querySelectorAll(".apply-link").forEach(function(a){
+      var role=a.getAttribute("data-role")||"";
+      var m=meta(role);
+      a.setAttribute("href",m.mailto);          /* one-click draft + right-click + no-JS still work */
+      a.addEventListener("click",function(){
+        /* let the browser open the visitor's own mail client (native href),
+           then show the guaranteed fallback dialog if nothing took over the page */
+        var left=false; function onLeave(){left=true;}
+        window.addEventListener("blur",onLeave,{once:true});
+        setTimeout(function(){
+          window.removeEventListener("blur",onLeave);
+          var focused=(typeof document.hasFocus==="function")?document.hasFocus():true;
+          if(!left&&focused&&!document.hidden)openModal(role);
+        },800);
+      });
+    });
+  })();
 
   /* hero agent-network canvas */
   (function(){
