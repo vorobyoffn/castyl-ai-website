@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="160" height="160" fill="none" role="img" aria-label="Castyl logomark">
+  <title>Castyl</title>
+  <defs>
+    <linearGradient id="cg" x1="18" y1="14" x2="84" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8E6BFF"/>
+      <stop offset=".55" stop-color="#6A4DFF"/>
+      <stop offset="1" stop-color="#00E5FF"/>
+    </linearGradient>
+    <linearGradient id="sg" x1="36" y1="35" x2="64" y2="65" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EAF7FF"/>
+      <stop offset="1" stop-color="#8FE3FF"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3.4" flood-color="#00E5FF" flood-opacity=".55"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="6.5" flood-color="#7C5CFF" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <g filter="url(#glow)">
+    <path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="url(#cg)"/>
+    <rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="url(#sg)"/>
+  </g>
+</svg>

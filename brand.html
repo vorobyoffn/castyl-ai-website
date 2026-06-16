@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Castyl — Brand & Logo Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#06070A;color:#F4F6FF;font-family:"Inter",system-ui,sans-serif;padding:54px 40px 70px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-family:"Space Grotesk";font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#727A96}
+h2{font-family:"Space Grotesk";font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#727A96;margin-bottom:18px}
+.hero-row{display:flex;align-items:center;gap:46px;flex-wrap:wrap;margin:26px 0 64px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.09)}
+.mark-xl{filter:drop-shadow(0 0 26px rgba(0,229,255,.4)) drop-shadow(0 0 50px rgba(124,92,255,.3))}
+.lockup{font-family:"Space Grotesk";font-weight:600;font-size:74px;letter-spacing:-2.5px;line-height:1}
+.lockup .sub{display:block;font-size:15px;font-weight:400;letter-spacing:0;color:#A6ADC8;margin-top:12px;font-family:"Inter"}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:62px}
+.tile{border:1px solid rgba(255,255,255,.09);border-radius:18px;height:170px;display:grid;place-items:center;position:relative;overflow:hidden}
+.tile .cap{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:"JetBrains Mono";font-size:11px;color:#727A96}
+.t-dark{background:#06070A}
+.t-surface{background:#12151F}
+.t-light{background:#EAF0F7}
+.t-grad{background:linear-gradient(135deg,#7C5CFF,#00E5FF)}
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:10px}
+.sw{border-radius:14px;height:96px;border:1px solid rgba(255,255,255,.09);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:12px}
+.sw span{font-family:"JetBrains Mono";font-size:11px;color:rgba(255,255,255,.92);text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.note{color:#727A96;font-size:13px;margin-top:30px;font-family:"JetBrains Mono"}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Castyl · Logo &amp; Brand Sheet</h1>
+
+  <div class="hero-row">
+    <svg class="mark-xl" width="148" height="148" viewBox="0 0 100 100" fill="none" aria-label="Castyl logomark">
+      <defs>
+        <linearGradient id="cg" x1="18" y1="14" x2="84" y2="88" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E6BFF"/><stop offset=".55" stop-color="#6A4DFF"/><stop offset="1" stop-color="#00E5FF"/></linearGradient>
+        <linearGradient id="sg" x1="36" y1="35" x2="64" y2="65" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#EAF7FF"/><stop offset="1" stop-color="#8FE3FF"/></linearGradient>
+      </defs>
+      <path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="url(#cg)"/>
+      <rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="url(#sg)"/>
+    </svg>
+    <div class="lockup">Castyl<span class="sub">AI employees for service businesses</span></div>
+  </div>
+
+  <h2>Logomark — usage</h2>
+  <div class="grid">
+    <div class="tile t-dark">
+      <svg width="74" height="74" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 0 14px rgba(0,229,255,.4))"><path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="url(#cg)"/><rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="url(#sg)"/></svg>
+      <span class="cap">on void #06070A</span>
+    </div>
+    <div class="tile t-surface">
+      <svg width="74" height="74" viewBox="0 0 100 100" fill="none"><path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="url(#cg)"/><rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="url(#sg)"/></svg>
+      <span class="cap">on surface #12151F</span>
+    </div>
+    <div class="tile t-light">
+      <svg width="74" height="74" viewBox="0 0 100 100" fill="none"><path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="#1E2A4A"/><rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="#6B7E9C"/></svg>
+      <span class="cap" style="color:#5F6B82">navy · on light</span>
+    </div>
+    <div class="tile t-grad">
+      <svg width="74" height="74" viewBox="0 0 100 100" fill="none"><path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="#06070A"/><rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="#06070A"/></svg>
+      <span class="cap" style="color:rgba(6,7,10,.7)">knockout · on brand</span>
+    </div>
+  </div>
+
+  <h2>Palette</h2>
+  <div class="swatches">
+    <div class="sw" style="background:#06070A"><span>#06070A void</span></div>
+    <div class="sw" style="background:#12151F"><span>#12151F surface</span></div>
+    <div class="sw" style="background:#7C5CFF"><span>#7C5CFF violet</span></div>
+    <div class="sw" style="background:#00E5FF"><span style="color:#06121a">#00E5FF cyan</span></div>
+    <div class="sw" style="background:#FF5CAA"><span style="color:#2a0d1c">#FF5CAA magenta</span></div>
+  </div>
+
+  <p class="note">// Recreation of the original C-mark — same bold C cradling a centered square,<br>// re-skinned in the site's violet→cyan gradient with a soft neon glow on near-black.</p>
+</div>
+</body>
+</html>

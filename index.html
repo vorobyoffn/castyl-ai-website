@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#06070A" />
+<title>Castyl — Your AI workforce, done for you</title>
+<meta name="description" content="Castyl builds and runs AI receptionists, websites, and automations for growing businesses — answering every call, replying to leads in seconds, and booking more work. Done for you." />
+<meta property="og:title" content="Castyl — Your AI workforce, done for you" />
+<meta property="og:description" content="Never miss another call, lead, or customer. We build and run the AI that books more work — for businesses and the people who run them." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://castyl.ai/" />
+<meta property="og:image" content="https://castyl.ai/assets/og-image.png" />
+<link rel="canonical" href="https://castyl.ai/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Castyl — Your AI workforce, done for you" />
+<meta name="twitter:description" content="We build and run the AI that answers every call, replies to every lead, and books more work — done for you." />
+<meta name="twitter:image" content="https://castyl.ai/assets/og-image.png" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='18' y1='14' x2='84' y2='88' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%238E6BFF'/%3E%3Cstop offset='1' stop-color='%2300E5FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%2306070A'/%3E%3Cpath d='M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z' fill='url(%23g)'/%3E%3Crect x='36.5' y='36.5' width='27' height='27' rx='7' fill='%23D9F4FF'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* ============================== TOKENS ============================== */
+:root{
+  --void:#06070A;
+  --surface:#0C0E14;
+  --elevated:#12151F;
+  --glass:rgba(255,255,255,0.035);
+  --hairline:rgba(255,255,255,0.09);
+  --hairline-strong:rgba(255,255,255,0.16);
+  --ink:#F4F6FF;
+  --muted:#A6ADC8;
+  --muted-2:#727A96;
+  --violet:#7C5CFF;
+  --cyan:#00E5FF;
+  --magenta:#FF5CAA;
+  --grad:linear-gradient(135deg,#7C5CFF 0%,#00E5FF 100%);
+  --grad-tri:linear-gradient(120deg,#FF5CAA 0%,#7C5CFF 45%,#00E5FF 100%);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --maxw:1180px;
+  --r-lg:24px;
+  --r-md:16px;
+  --r-sm:11px;
+  --glow-violet:0 0 60px rgba(124,92,255,.45);
+  --glow-cyan:0 0 60px rgba(0,229,255,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--void);color:var(--ink);line-height:1.6;
+  overflow-x:hidden;font-feature-settings:"ss01","cv01","cv11";
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+::selection{background:rgba(124,92,255,.4);color:#fff}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+h1,h2,h3,h4{font-family:"Space Grotesk",system-ui,sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ============================== LAYOUT ============================== */
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{position:relative;z-index:2}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  padding:7px 14px;border:1px solid var(--hairline);border-radius:100px;
+  background:var(--glass);backdrop-filter:blur(8px);
+}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.gtext{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gtext-tri{background:var(--grad-tri);-webkit-background-clip:text;background-clip:text;color:transparent}
+.section-head{max-width:680px;margin-bottom:54px}
+.section-head h2{font-size:clamp(30px,4.4vw,52px);margin:18px 0 16px}
+.section-head p{color:var(--muted);font-size:clamp(16px,1.6vw,18.5px)}
+
+/* ============================== FX OVERLAYS ============================== */
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");}
+.spotlight{position:fixed;width:520px;height:520px;border-radius:50%;z-index:0;pointer-events:none;
+  background:radial-gradient(circle,rgba(124,92,255,.16),transparent 65%);
+  transform:translate(-50%,-50%);left:50%;top:30%;transition:opacity .4s;filter:blur(8px)}
+.scrollbar{position:fixed;top:0;left:0;height:2.5px;width:0;z-index:200;background:var(--grad);
+  box-shadow:0 0 14px rgba(0,229,255,.7)}
+
+/* ============================== NAV ============================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .4s var(--ease)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;
+  max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.nav.scrolled .nav-inner{height:62px}
+.nav.scrolled{background:rgba(8,9,14,.72);backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid var(--hairline)}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk";font-weight:600;font-size:21px;letter-spacing:-.01em}
+.brand .mark{display:grid;place-items:center}
+.brand .mark svg{width:32px;height:32px;filter:drop-shadow(0 1px 7px rgba(0,229,255,.4))}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{font-size:14.5px;color:var(--muted);padding:9px 14px;border-radius:9px;transition:.2s;font-weight:500}
+.nav-links a:hover{color:var(--ink);background:var(--glass)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:14.5px;
+  border-radius:11px;padding:11px 20px;transition:transform .25s var(--ease),box-shadow .3s,background .3s,border-color .3s;white-space:nowrap}
+.btn-ghost{color:var(--ink);border:1px solid var(--hairline-strong);background:var(--glass)}
+.btn-ghost:hover{border-color:var(--hairline-strong);background:rgba(255,255,255,.07)}
+.btn-primary{color:#0a0b12;background:var(--grad);box-shadow:0 6px 24px rgba(124,92,255,.4)}
+.btn-primary:hover{box-shadow:0 10px 38px rgba(124,92,255,.6)}
+.btn-lg{padding:15px 28px;font-size:16px;border-radius:13px}
+.btn .arr{transition:transform .25s var(--ease)}
+.btn:hover .arr{transform:translateX(3px)}
+.nav-burger{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--hairline);background:var(--glass);place-items:center}
+.nav-burger span,.nav-burger span::before,.nav-burger span::after{content:"";display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;position:relative}
+.nav-burger span::before{position:absolute;top:-6px}.nav-burger span::after{position:absolute;top:6px}
+
+/* ============================== HERO ============================== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:80px;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;z-index:0;opacity:.9}
+.hero-aurora{position:absolute;z-index:0;pointer-events:none;filter:blur(60px);border-radius:50%}
+.aur-1{width:620px;height:620px;top:-180px;right:-120px;background:radial-gradient(circle,rgba(124,92,255,.5),transparent 70%)}
+.aur-2{width:520px;height:520px;bottom:-200px;left:-140px;background:radial-gradient(circle,rgba(0,229,255,.35),transparent 70%)}
+.aur-3{width:380px;height:380px;top:30%;left:40%;background:radial-gradient(circle,rgba(255,92,170,.22),transparent 70%)}
+.hero-grid{position:absolute;inset:0;z-index:0;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 35%,#000 30%,transparent 78%)}
+.hero-inner{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;text-align:center}
+.hero h1{font-size:clamp(42px,7.2vw,88px);font-weight:700;line-height:.98;margin:26px auto 0;max-width:15ch;letter-spacing:-.035em}
+.hero h1 .line{display:block}
+.hero-sub{max-width:640px;margin:26px auto 0;font-size:clamp(17px,2vw,20px);color:var(--muted)}
+.hero-actions{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+.hero-trust{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.hero-trust .label{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
+.hero-stats{display:flex;gap:38px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.hero-stats .s{display:flex;flex-direction:column;align-items:center}
+.hero-stats .s b{font-family:"Space Grotesk";font-size:26px;font-weight:600}
+.hero-stats .s span{font-size:12.5px;color:var(--muted-2)}
+.hero-stats .div{width:1px;background:var(--hairline)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.14s}.d3{transition-delay:.22s}.d4{transition-delay:.3s}.d5{transition-delay:.38s}
+
+/* ============================== MARQUEE ============================== */
+.marquee{padding:38px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+  position:relative;overflow:hidden;background:rgba(255,255,255,.012)}
+.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:160px;z-index:2}
+.marquee::before{left:0;background:linear-gradient(90deg,var(--void),transparent)}
+.marquee::after{right:0;background:linear-gradient(270deg,var(--void),transparent)}
+.marquee-track{display:flex;gap:56px;width:max-content;animation:scroll-x 34s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes scroll-x{to{transform:translateX(-50%)}}
+.logo-item{display:flex;align-items:center;gap:10px;color:var(--muted-2);font-family:"Space Grotesk";font-weight:600;font-size:18px;opacity:.7;transition:.3s;white-space:nowrap}
+.logo-item:hover{opacity:1;color:var(--ink)}
+.logo-item .gem{width:18px;height:18px;border-radius:5px;background:var(--glass);border:1px solid var(--hairline);display:grid;place-items:center}
+.logo-item .gem i{width:7px;height:7px;border-radius:2px;background:var(--grad);display:block}
+
+/* ============================== BENTO / SERVICES ============================== */
+.pad{padding:clamp(80px,11vw,140px) 0}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  border:1px solid var(--hairline);border-radius:var(--r-lg);padding:30px;overflow:hidden;
+  transition:transform .4s var(--ease),border-color .4s,box-shadow .4s}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(140deg,rgba(124,92,255,.5),transparent 40%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.4s}
+.card:hover{transform:translateY(-5px);border-color:var(--hairline-strong);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.card:hover::before{opacity:1}
+.card .ico{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;margin-bottom:18px;
+  background:var(--glass);border:1px solid var(--hairline);box-shadow:inset 0 0 22px rgba(124,92,255,.2)}
+.card .ico svg{width:24px;height:24px;stroke:var(--cyan)}
+.card h3{font-size:21px;margin-bottom:9px}
+.card p{color:var(--muted);font-size:15px}
+.col-2{grid-column:span 2}.col-3{grid-column:span 3}.col-4{grid-column:span 4}.col-6{grid-column:span 6}
+.card.big{padding:34px}
+.card.big h3{font-size:27px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{font-size:12.5px;color:var(--muted);padding:6px 12px;border:1px solid var(--hairline);border-radius:8px;background:var(--glass);font-family:"JetBrains Mono"}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-family:"JetBrains Mono";color:#06121a;
+  background:var(--grad);border-radius:100px;padding:4px 11px;margin-bottom:16px;font-weight:600;letter-spacing:.02em}
+.svc-more{list-style:none;display:flex;flex-wrap:wrap;gap:9px;margin-top:6px}
+.svc-more li{font-size:13.5px;color:var(--muted);padding:8px 14px;border:1px solid var(--hairline);border-radius:10px;background:var(--glass);transition:.25s}
+.svc-more li:hover{color:var(--ink);border-color:var(--hairline-strong)}
+
+/* ============================== CONVERSATION DEMO ============================== */
+.studio-wrap{position:relative}
+.studio-glow{position:absolute;inset:-40px;z-index:0;pointer-events:none;filter:blur(70px);opacity:.55;
+  background:radial-gradient(60% 60% at 50% 0%,rgba(124,92,255,.5),transparent 70%)}
+.studio{position:relative;z-index:2;background:linear-gradient(180deg,rgba(18,21,31,.9),rgba(10,12,18,.92));
+  border:1px solid var(--hairline-strong);border-radius:26px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.studio-bar{display:flex;align-items:center;gap:14px;padding:15px 20px;border-bottom:1px solid var(--hairline);background:rgba(255,255,255,.02)}
+.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;display:block;background:#2a2e3c}
+.dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.studio-bar .title{font-family:"JetBrains Mono";font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.studio-bar .live{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-family:"JetBrains Mono"}
+.studio-bar .live i{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.studio-body{padding:24px}
+.chips{display:flex;gap:9px;flex-wrap:wrap}
+.chip{font-size:13px;color:var(--muted);padding:8px 14px;border:1px solid var(--hairline);border-radius:100px;background:var(--glass);transition:.2s}
+.chip:hover{color:var(--ink);border-color:var(--hairline-strong);background:rgba(255,255,255,.06)}
+.chip.active{color:var(--ink);border-color:rgba(124,92,255,.5);background:rgba(124,92,255,.14)}
+.convo{display:flex;flex-direction:column;gap:11px;margin-top:22px;min-height:262px}
+.bubble{max-width:80%;padding:11px 15px;border-radius:17px;font-size:14.5px;line-height:1.5;animation:rise .45s var(--ease)}
+.bubble .meta{display:block;font-size:10px;letter-spacing:.05em;opacity:.7;margin-bottom:4px;font-family:"JetBrains Mono";text-transform:uppercase}
+.bubble.in{align-self:flex-start;background:var(--elevated);border:1px solid var(--hairline);color:#dfe3f2;border-bottom-left-radius:5px}
+.bubble.sys{align-self:center;text-align:center;background:rgba(255,255,255,.03);border:1px dashed var(--hairline-strong);color:var(--muted);font-family:"JetBrains Mono";font-size:12px;max-width:94%}
+.bubble.sys .meta{margin-bottom:3px}
+.bubble.out{align-self:flex-end;background:linear-gradient(135deg,#7C5CFF,#00E5FF);color:#06121a;border-bottom-right-radius:5px;font-weight:500}
+.bubble.out .meta{color:#0a1f2a;opacity:.85}
+.bubble .cur{display:inline-block;width:6px;height:13px;background:#06121a;vertical-align:-2px;margin-left:1px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.typing{display:inline-flex;gap:5px;align-items:center;padding:3px 2px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#06121a;opacity:.5;animation:td 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+.outcome{margin-top:16px;display:none;align-items:center;gap:13px;border:1px solid rgba(0,229,255,.3);border-radius:14px;padding:14px 18px;background:linear-gradient(120deg,rgba(0,229,255,.07),rgba(124,92,255,.07))}
+.outcome.show{display:flex;animation:rise .5s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.outcome .check{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--grad);flex-shrink:0;box-shadow:var(--glow-cyan)}
+.outcome .check svg{width:17px;height:17px;stroke:#08121a;stroke-width:3}
+.outcome b{font-size:14.5px;display:block}
+.outcome span{font-size:13px;color:var(--muted)}
+
+/* ============================== HOW IT WORKS ============================== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.steps::before{content:"";position:absolute;top:34px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--hairline-strong),transparent);z-index:0}
+.step{position:relative;z-index:1;text-align:center;padding:0 6px}
+.step .num{width:70px;height:70px;margin:0 auto 20px;border-radius:18px;display:grid;place-items:center;
+  background:var(--surface);border:1px solid var(--hairline-strong);font-family:"Space Grotesk";font-weight:600;font-size:24px;
+  position:relative;box-shadow:inset 0 0 26px rgba(124,92,255,.2)}
+.step .num span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step h3{font-size:19px;margin-bottom:8px}
+.step p{font-size:14.5px;color:var(--muted)}
+
+/* ============================== USE CASES / INDUSTRIES ============================== */
+.uc-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px;justify-content:center}
+.uc-tab{font-size:14.5px;font-weight:500;color:var(--muted);padding:10px 18px;border:1px solid var(--hairline);border-radius:100px;background:var(--glass);transition:.25s}
+.uc-tab.active{color:var(--ink);border-color:var(--hairline-strong);background:rgba(124,92,255,.12)}
+.uc-panel{display:none;grid-template-columns:1fr 1fr;gap:40px;align-items:center;animation:fade .5s var(--ease)}
+.uc-panel.active{display:grid}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.uc-panel h3{font-size:clamp(24px,3vw,34px);margin-bottom:14px}
+.uc-panel p{color:var(--muted);font-size:16px;margin-bottom:22px}
+.uc-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+.uc-list li{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+.uc-list .ck{width:22px;height:22px;border-radius:7px;background:var(--glass);border:1px solid var(--hairline);display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.uc-list .ck svg{width:13px;height:13px;stroke:var(--cyan);stroke-width:2.5}
+.uc-visual{border:1px solid var(--hairline);border-radius:var(--r-lg);padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);min-height:300px;position:relative;overflow:hidden}
+.uc-flow{display:flex;flex-direction:column;gap:12px}
+.uc-flow .row{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid var(--hairline);border-radius:12px;background:var(--void);font-size:13.5px;font-family:"JetBrains Mono"}
+.uc-flow .row .d{width:9px;height:9px;border-radius:50%;background:var(--grad);box-shadow:0 0 10px rgba(0,229,255,.6);flex-shrink:0}
+.uc-flow .row .meta{margin-left:auto;color:var(--muted-2);font-size:11.5px}
+
+/* ============================== STATS ============================== */
+.stats-band{border:1px solid var(--hairline);border-radius:var(--r-lg);background:
+  radial-gradient(120% 140% at 50% -20%,rgba(124,92,255,.14),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.02),transparent);
+  padding:54px 30px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat b{font-family:"Space Grotesk";font-weight:700;font-size:clamp(38px,5vw,58px);line-height:1;display:block}
+.stat .suf{font-size:.6em}
+.stat span{color:var(--muted);font-size:14.5px;margin-top:10px;display:block}
+
+/* ============================== TESTIMONIALS ============================== */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.quote{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--hairline);
+  border-radius:var(--r-lg);padding:26px;transition:transform .4s var(--ease),border-color .4s}
+.quote:hover{transform:translateY(-4px);border-color:var(--hairline-strong)}
+.quote .stars{color:var(--cyan);font-size:14px;letter-spacing:3px;margin-bottom:14px}
+.quote p{font-size:15.5px;color:#dfe3f2;margin-bottom:20px}
+.quote .by{display:flex;align-items:center;gap:12px}
+.quote .ava{width:42px;height:42px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-family:"Space Grotesk";font-weight:600;color:#0a0b12;font-size:16px}
+.quote .by b{font-size:14.5px;display:block}
+.quote .by span{font-size:12.5px;color:var(--muted-2)}
+
+/* ============================== PRICING ============================== */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.tier{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  border:1px solid var(--hairline);border-radius:var(--r-lg);padding:32px;display:flex;flex-direction:column;transition:transform .4s var(--ease),border-color .4s}
+.tier:hover{transform:translateY(-5px)}
+.tier.featured{border-color:rgba(124,92,255,.5);box-shadow:0 30px 80px rgba(124,92,255,.18)}
+.tier.featured::after{content:"Most popular";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:100px;
+  background:var(--grad);color:#0a0b12;box-shadow:var(--glow-violet)}
+.tier h3{font-size:19px}
+.tier .price{font-family:"Space Grotesk";font-weight:700;font-size:46px;margin:14px 0 2px;display:flex;align-items:baseline;gap:6px}
+.tier .price .per{font-size:15px;font-weight:400;color:var(--muted-2);font-family:"Inter";white-space:nowrap}
+.tier .setup{font-size:13px;color:var(--muted-2);margin-bottom:12px}
+.tier .fit{font-family:"JetBrains Mono";font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);margin:14px 0 10px}
+.tier .desc{color:var(--muted);font-size:14px;min-height:42px}
+.tier ul{list-style:none;margin:20px 0 26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.tier ul li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:#cdd2e6}
+.tier ul .ck{width:20px;height:20px;border-radius:6px;background:var(--glass);border:1px solid var(--hairline);display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.tier ul .ck svg{width:12px;height:12px;stroke:var(--cyan);stroke-width:2.5}
+
+/* ============================== CTA ============================== */
+.cta{position:relative;border-radius:32px;overflow:hidden;padding:clamp(60px,9vw,110px) 30px;text-align:center;
+  border:1px solid var(--hairline-strong);background:linear-gradient(180deg,rgba(18,21,31,.6),rgba(10,12,18,.6))}
+.cta-aurora{position:absolute;inset:0;z-index:0;pointer-events:none}
+.cta-aurora i{position:absolute;border-radius:50%;filter:blur(70px)}
+.cta-aurora .a{width:480px;height:480px;top:-160px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(124,92,255,.45),transparent 70%)}
+.cta-aurora .b{width:360px;height:360px;bottom:-160px;left:20%;background:radial-gradient(circle,rgba(0,229,255,.3),transparent 70%)}
+.cta-aurora .c{width:300px;height:300px;bottom:-120px;right:18%;background:radial-gradient(circle,rgba(255,92,170,.22),transparent 70%)}
+.cta h2{position:relative;z-index:2;font-size:clamp(34px,5.4vw,62px);max-width:16ch;margin:0 auto 18px}
+.cta p{position:relative;z-index:2;color:var(--muted);font-size:18px;max-width:560px;margin:0 auto 34px}
+.cta .hero-actions{position:relative;z-index:2}
+
+/* ============================== FOOTER ============================== */
+footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);padding:64px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.foot-brand p{color:var(--muted);font-size:14.5px;max-width:30ch;margin:16px 0 20px}
+.foot-soc{display:flex;gap:10px}
+.foot-soc a{width:38px;height:38px;border-radius:10px;border:1px solid var(--hairline);background:var(--glass);display:grid;place-items:center;transition:.25s}
+.foot-soc a:hover{border-color:var(--hairline-strong);background:rgba(255,255,255,.06)}
+.foot-soc a svg{width:17px;height:17px;stroke:var(--muted);fill:none}
+.foot-soc a:hover svg{stroke:var(--ink)}
+.foot-col h5{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-bottom:16px;font-family:"Inter";font-weight:600}
+.foot-col a{display:block;color:var(--muted);font-size:14.5px;padding:6px 0;transition:.2s}
+.foot-col a:hover{color:var(--ink)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:26px;border-top:1px solid var(--hairline);color:var(--muted-2);font-size:13.5px;flex-wrap:wrap;gap:12px}
+
+/* ============================== RESPONSIVE ============================== */
+@media(max-width:980px){
+  .nav-links{display:none}
+  .nav.open .nav-inner{background:rgba(8,9,14,.92);backdrop-filter:blur(18px) saturate(160%)}
+  .nav.open .nav-links{display:flex;flex-direction:column;align-items:stretch;position:absolute;top:100%;left:0;right:0;
+    background:rgba(8,9,14,.97);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--hairline);
+    padding:12px 20px 18px;gap:2px;animation:fade .25s var(--ease)}
+  .nav.open .nav-links a{padding:13px 10px;font-size:16px;border-radius:10px}
+  .nav.open .nav-burger span{background:transparent}
+  .nav.open .nav-burger span::before{transform:rotate(45deg);top:0}
+  .nav.open .nav-burger span::after{transform:rotate(-45deg);top:0}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .col-2,.col-3,.col-4{grid-column:span 1}.col-6{grid-column:span 2}
+  .steps{grid-template-columns:repeat(2,1fr)}.steps::before{display:none}
+  .uc-panel.active{grid-template-columns:1fr}
+  .stats-band{grid-template-columns:repeat(2,1fr);row-gap:38px}
+  .quotes,.tiers{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .nav-burger{display:grid}
+}
+@media(max-width:560px){
+  .wrap{padding:0 18px}
+  .bento{grid-template-columns:1fr}.col-6{grid-column:span 1}
+  .steps{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-stats{gap:22px}.hero-stats .div{display:none}
+  .nav-cta .btn-ghost{display:none}
+  .bubble{max-width:90%}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="spotlight" id="spotlight"></div>
+<div class="scrollbar" id="scrollbar"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Castyl home">
+      <span class="mark">
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="cgNav" x1="18" y1="14" x2="84" y2="88" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E6BFF"/><stop offset=".55" stop-color="#6A4DFF"/><stop offset="1" stop-color="#00E5FF"/></linearGradient>
+            <linearGradient id="sgNav" x1="36" y1="35" x2="64" y2="65" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#EAF7FF"/><stop offset="1" stop-color="#8FE3FF"/></linearGradient>
+          </defs>
+          <path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="url(#cgNav)"/>
+          <rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="url(#sgNav)"/>
+        </svg>
+      </span>
+      Castyl
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#demo">Live demo</a>
+      <a href="#how">How it works</a>
+      <a href="#industries">Who it's for</a>
+      <a href="#packages">Packages</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Client login</a>
+      <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a call <span class="arr">→</span></a>
+      <button class="nav-burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-aurora aur-1"></div>
+  <div class="hero-aurora aur-2"></div>
+  <div class="hero-aurora aur-3"></div>
+  <div class="hero-inner">
+    <span class="eyebrow reveal"><span class="dot"></span> AI employees for growing businesses</span>
+    <h1 class="reveal d1">
+      <span class="line">Your AI workforce,</span>
+      <span class="line gtext">done for you.</span>
+    </h1>
+    <p class="hero-sub reveal d2">We build and run AI receptionists, websites, and automations that answer every call, reply to leads in seconds, and book more work — for businesses of every kind, and the people who run them.</p>
+    <div class="hero-actions reveal d3">
+      <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a call <span class="arr">→</span></a>
+      <a href="#services" class="btn btn-ghost btn-lg">Explore services</a>
+    </div>
+    <div class="hero-trust reveal d4">
+      <div class="hero-stats">
+        <div class="s"><b class="gtext" data-count="100" data-suffix="%">0</b><span>of calls answered</span></div>
+        <div class="div"></div>
+        <div class="s"><b class="gtext" data-count="60" data-suffix="s">0</b><span>avg. lead response</span></div>
+        <div class="div"></div>
+        <div class="s"><b class="gtext" data-count="3" data-suffix="×">0</b><span>more booked jobs</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MARQUEE ============ -->
+<section class="marquee" aria-label="Industries served">
+  <div class="marquee-track" id="marquee"></div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="pad" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="dot"></span> What we build &amp; run</span>
+      <h2>Done-for-you AI that captures <span class="gtext">every lead</span>.</h2>
+      <p>Pick the AI employees your business needs. We set them up inside your phone, website, and CRM — then run them for you. You just take the booked jobs.</p>
+    </div>
+    <div class="bento">
+      <div class="card col-3 big reveal">
+        <span class="pill">Most requested</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
+        <h3>AI Voice Receptionist</h3>
+        <p>Answers every call 24/7 — books appointments, answers questions, qualifies callers, and routes emergencies. Your front desk that never sleeps, never takes lunch, and never puts anyone on hold.</p>
+        <div class="tag-row"><span class="tag">24/7</span><span class="tag">books jobs</span><span class="tag">any language</span><span class="tag">call summaries</span></div>
+      </div>
+      <div class="card col-3 big reveal d1">
+        <span class="pill">Fastest ROI</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-9A8.4 8.4 0 1 1 21 11.5Z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></div>
+        <h3>Missed-Call Text-Back</h3>
+        <p>Every missed call instantly triggers an AI text that recovers the lead and books the job — before they ever call a competitor. The single cheapest way to stop bleeding revenue.</p>
+        <div class="tag-row"><span class="tag">instant SMS</span><span class="tag">recovers leads</span><span class="tag">books jobs</span></div>
+      </div>
+      <div class="card col-2 reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div>
+        <h3>Website + AI Chat</h3>
+        <p>A fast, high-converting site with a 24/7 chat that answers questions and books visitors on the spot.</p>
+      </div>
+      <div class="card col-2 reveal d1">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+        <h3>Speed-to-Lead</h3>
+        <p>Every form, Google, or Facebook lead gets a personal reply in under 60 seconds — automatically.</p>
+      </div>
+      <div class="card col-2 reveal d2">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.4 6 .9-4.3 4.2 1 6L12 16.8 6.6 19.5l1-6L3.3 9.3l6-.9L12 3Z"/></svg></div>
+        <h3>Reviews on Autopilot</h3>
+        <p>Automatically asks happy customers for 5-star Google reviews — and routes unhappy ones to you first.</p>
+      </div>
+      <div class="card col-3 reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg></div>
+        <h3>Database Reactivation</h3>
+        <p>We text your old, dormant customer list with a smart offer and rebook jobs from leads you already paid for. Often pays for the whole system in week one.</p>
+      </div>
+      <div class="card col-3 reveal d1">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M3 12h18M3 19h12"/><circle cx="19" cy="19" r="2.4"/></svg></div>
+        <h3>Follow-Up &amp; Nurture</h3>
+        <p>Never let a lead go cold. Castyl keeps following up by text and email — politely, persistently — until they book or opt out.</p>
+      </div>
+      <div class="card col-6 reveal">
+        <h3 style="margin-bottom:6px">…and the rest of your growth stack</h3>
+        <p style="margin-bottom:8px">Bolt on whatever you need — we build, integrate, and manage all of it.</p>
+        <ul class="svc-more">
+          <li>Local SEO &amp; Google Business</li>
+          <li>Content &amp; social posts</li>
+          <li>Paid ads management</li>
+          <li>Email &amp; SMS campaigns</li>
+          <li>No-show reminders</li>
+          <li>AI call summaries &amp; CRM logging</li>
+          <li>AI review replies</li>
+          <li>Reporting dashboard</li>
+          <li>CRM setup &amp; automation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE DEMO ============ -->
+<section class="pad" id="demo" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:720px">
+      <span class="eyebrow"><span class="dot"></span> Live demo</span>
+      <h2>Watch Castyl <span class="gtext">answer, reply &amp; book</span> — instantly.</h2>
+      <p>Pick a real moment from a typical day. See exactly how your AI employee handles it — in real time, the way your customers would.</p>
+    </div>
+    <div class="studio-wrap reveal d1">
+      <div class="studio-glow"></div>
+      <div class="studio">
+        <div class="studio-bar">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <span class="title" id="demo-bar-title">castyl · live</span>
+          <span class="live"><i></i> live</span>
+        </div>
+        <div class="studio-body">
+          <div class="chips" id="demo-chips">
+            <button class="chip" type="button" data-scn="missed">📞 Missed call → text-back</button>
+            <button class="chip" type="button" data-scn="lead">🌐 New website lead</button>
+            <button class="chip" type="button" data-scn="after">🌙 After-hours booking</button>
+            <button class="chip" type="button" data-scn="review">⭐ Review request</button>
+          </div>
+          <div class="convo" id="convo"></div>
+          <div class="outcome" id="outcome">
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <div><b id="outcome-title"></b><span id="outcome-sub"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="pad" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin:0 auto 54px;text-align:center;max-width:640px">
+      <span class="eyebrow"><span class="dot"></span> How it works</span>
+      <h2>Live in <span class="gtext">days, not months</span>.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num"><span>01</span></div><h3>Book a quick call</h3><p>A free 15-minute call to map exactly where you're losing leads — missed calls, slow follow-up, no reviews.</p></div>
+      <div class="step reveal d1"><div class="num"><span>02</span></div><h3>We build it</h3><p>We set up your AI employees and connect them to your phone, website, and CRM. Zero lift for you.</p></div>
+      <div class="step reveal d2"><div class="num"><span>03</span></div><h3>It runs for you</h3><p>Calls answered, leads replied to, jobs booked — automatically, around the clock.</p></div>
+      <div class="step reveal d3"><div class="num"><span>04</span></div><h3>We optimize</h3><p>Monthly reporting and tuning, so you book even more every single month.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<section class="pad" id="industries" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 36px;max-width:620px">
+      <span class="eyebrow"><span class="dot"></span> Who it's for</span>
+      <h2>Built for businesses <span class="gtext">of every kind</span>.</h2>
+    </div>
+    <div class="uc-tabs reveal d1" id="uc-tabs">
+      <button class="uc-tab active" data-uc="0">Local &amp; home services</button>
+      <button class="uc-tab" data-uc="1">Health &amp; wellness</button>
+      <button class="uc-tab" data-uc="2">Coaches &amp; creators</button>
+      <button class="uc-tab" data-uc="3">Agencies &amp; B2B</button>
+    </div>
+    <div id="uc-panels">
+      <div class="uc-panel active">
+        <div><h3>Fill the schedule. Never miss an emergency.</h3><p>HVAC, plumbing, electrical, roofing, cleaning — capture every call and book more jobs, day or night.</p>
+          <ul class="uc-list">
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>24/7 emergency call answering &amp; booking</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Instant missed-call text-back</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Automatic review requests after every job</li>
+          </ul></div>
+        <div class="uc-visual"><div class="uc-flow">
+          <div class="row"><span class="d"></span> incoming call · 7:42 PM <span class="meta">answered</span></div>
+          <div class="row"><span class="d"></span> job booked → calendar <span class="meta">auto</span></div>
+          <div class="row"><span class="d"></span> reminder sent <span class="meta">SMS</span></div>
+          <div class="row"><span class="d"></span> review requested <span class="meta">5★</span></div>
+        </div></div>
+      </div>
+      <div class="uc-panel">
+        <div><h3>More booked appointments, fewer no-shows.</h3><p>Dental, derm, med spa, chiro, and wellness — fill your calendar and win back lapsed patients.</p>
+          <ul class="uc-list">
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>After-hours self-booking</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>No-show reminders &amp; rescheduling</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Reactivate past patients automatically</li>
+          </ul></div>
+        <div class="uc-visual"><div class="uc-flow">
+          <div class="row"><span class="d"></span> after-hours inquiry <span class="meta">booked</span></div>
+          <div class="row"><span class="d"></span> confirmation + intake <span class="meta">auto</span></div>
+          <div class="row"><span class="d"></span> reminder · -24h <span class="meta">no-show ↓</span></div>
+          <div class="row"><span class="d"></span> win-back lapsed list <span class="meta">campaign</span></div>
+        </div></div>
+      </div>
+      <div class="uc-panel">
+        <div><h3>Turn DMs and followers into booked calls.</h3><p>Coaches, consultants, course creators, solo founders — reply instantly and book discovery calls while you sleep.</p>
+          <ul class="uc-list">
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Instant DM &amp; inbox replies</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Qualify &amp; book discovery calls</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Nurture your audience on autopilot</li>
+          </ul></div>
+        <div class="uc-visual"><div class="uc-flow">
+          <div class="row"><span class="d"></span> new DM · 11:15 PM <span class="meta">replied</span></div>
+          <div class="row"><span class="d"></span> qualify(fit, goal) <span class="meta">auto</span></div>
+          <div class="row"><span class="d"></span> discovery call booked <span class="meta">calendar</span></div>
+          <div class="row"><span class="d"></span> nurture the list <span class="meta">drip</span></div>
+        </div></div>
+      </div>
+      <div class="uc-panel">
+        <div><h3>Respond in seconds. Book more demos.</h3><p>Agencies, SaaS, and professional services — speed-to-lead and follow-up that keep your pipeline full.</p>
+          <ul class="uc-list">
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>60-second response to every lead</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Demo &amp; meeting scheduling</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Long-term nurture until they buy</li>
+          </ul></div>
+        <div class="uc-visual"><div class="uc-flow">
+          <div class="row"><span class="d"></span> inbound lead <span class="meta">&lt;60s reply</span></div>
+          <div class="row"><span class="d"></span> qualify(fit, budget) <span class="meta">auto</span></div>
+          <div class="row"><span class="d"></span> demo booked <span class="meta">calendar</span></div>
+          <div class="row"><span class="d"></span> nurture until close <span class="meta">drip</span></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="stats-band reveal">
+      <div class="stat"><b><span data-count="3">0</span><span class="suf">×</span></b><span>more booked jobs</span></div>
+      <div class="stat"><b><span data-count="100">0</span><span class="suf">%</span></b><span>of calls answered</span></div>
+      <div class="stat"><b><span data-count="60">0</span><span class="suf">s</span></b><span>avg. lead response</span></div>
+      <div class="stat"><b><span data-count="30">0</span><span class="suf">+</span></b><span>hours saved / month</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 50px;max-width:560px">
+      <span class="eyebrow"><span class="dot"></span> Real results</span>
+      <h2>Owners who stopped <span class="gtext">losing customers</span>.</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal"><div class="stars">★★★★★</div><p>"We stopped missing calls overnight. Castyl booked 14 extra jobs in our first month — straight from calls we used to lose to voicemail."</p><div class="by"><span class="ava">MT</span><div><b>Marcus Tate</b><span>Owner, Tate Heating &amp; Air</span></div></div></div>
+      <div class="quote reveal d1"><div class="stars">★★★★★</div><p>"The missed-call text-back alone paid for the whole system in week one. Patients book themselves now, even after hours."</p><div class="by"><span class="ava">LP</span><div><b>Dr. Lena Park</b><span>Bright Smile Dental</span></div></div></div>
+      <div class="quote reveal d2"><div class="stars">★★★★★</div><p>"Our Google reviews went from 38 to 190 in three months. We rank #1 locally now and the phone hasn't stopped."</p><div class="by"><span class="ava">PN</span><div><b>Priya Nair</b><span>Glow Med Spa</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pad" id="packages" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 56px;max-width:580px">
+      <span class="eyebrow"><span class="dot"></span> Packages</span>
+      <h2>Find the right <span class="gtext">package</span>.</h2>
+      <p>Three ways to work with us — we tailor the details to your business on a quick call. No pressure, no commitment.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier reveal">
+        <h3>AI Front Desk</h3>
+        <div class="fit">Start here</div>
+        <div class="desc">Stop missing calls and leads — your AI front desk, set up and run for you.</div>
+        <ul>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>AI voice receptionist, 24/7</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Missed-call text-back</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Appointment booking</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Call summaries to your inbox</li>
+        </ul>
+        <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-ghost" style="width:100%">Book a call</a>
+      </div>
+      <div class="tier featured reveal d1">
+        <h3>AI Office</h3>
+        <div class="fit">Best value</div>
+        <div class="desc">Capture, convert, and keep more customers — the full inbound system.</div>
+        <ul>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Everything in Front Desk</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Speed-to-lead (60-second replies)</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Reviews on autopilot</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Lead follow-up &amp; nurture</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Database reactivation</li>
+        </ul>
+        <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%">Book a call <span class="arr">→</span></a>
+      </div>
+      <div class="tier reveal d2">
+        <h3>AI Growth System</h3>
+        <div class="fit">Full service</div>
+        <div class="desc">Done-for-you growth, end to end.</div>
+        <ul>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Everything in AI Office</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>New website + AI chat</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Local SEO &amp; content</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Paid ads management</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Monthly strategy &amp; reporting</li>
+        </ul>
+        <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-ghost" style="width:100%">Book a call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="pad" id="book" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div class="cta-aurora"><i class="a"></i><i class="b"></i><i class="c"></i></div>
+      <h2>Stop losing leads. <span class="gtext-tri">Start booking more.</span></h2>
+      <p>Book a free 15-minute demo and we'll show you exactly where you're losing customers today — and how Castyl wins them back, on autopilot.</p>
+      <div class="hero-actions">
+        <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a call <span class="arr">→</span></a>
+        <a href="#packages" class="btn btn-ghost btn-lg">See packages</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <span class="mark">
+            <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="cgFoot" x1="18" y1="14" x2="84" y2="88" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8E6BFF"/><stop offset=".55" stop-color="#6A4DFF"/><stop offset="1" stop-color="#00E5FF"/></linearGradient>
+                <linearGradient id="sgFoot" x1="36" y1="35" x2="64" y2="65" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#EAF7FF"/><stop offset="1" stop-color="#8FE3FF"/></linearGradient>
+              </defs>
+              <path d="M81.52 25.37A40 40 0 1 0 81.52 74.63L65.76 62.31A20 20 0 1 1 65.76 37.69Z" fill="url(#cgFoot)"/>
+              <rect x="36.5" y="36.5" width="27" height="27" rx="7" fill="url(#sgFoot)"/>
+            </svg>
+          </span>
+          Castyl
+        </a>
+        <p>Your AI workforce, done for you. We build it, run it, and book you more work.</p>
+        <div class="foot-soc">
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" stroke-width="1.7"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Services</h5><a href="#services">AI Receptionist</a><a href="#services">Missed-Call Text-Back</a><a href="#services">Website + AI Chat</a><a href="#services">Reviews on Autopilot</a><a href="#services">Automation</a></div>
+      <div class="foot-col"><h5>Company</h5><a href="#industries">Who it's for</a><a href="#how">How it works</a><a href="#packages">Packages</a><a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener">Book a call</a></div>
+      <div class="foot-col"><h5>Resources</h5><a href="#">Case studies</a><a href="#">ROI calculator</a><a href="#">FAQ</a><a href="#">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Castyl. All rights reserved.</span>
+      <span style="display:flex;gap:22px"><a href="#" style="color:inherit">Privacy</a><a href="#" style="color:inherit">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- nav + scroll progress + spotlight ---------- */
+  var nav = document.getElementById("nav");
+  var bar = document.getElementById("scrollbar");
+  var spotlight = document.getElementById("spotlight");
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.toggle("scrolled", y > 24);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h>0 ? (y/h*100) : 0) + "%";
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  if(!reduce){
+    window.addEventListener("pointermove", function(e){
+      spotlight.style.left = e.clientX + "px";
+      spotlight.style.top = e.clientY + "px";
+    });
+  } else { spotlight.style.opacity = "0"; }
+
+  /* ---------- mobile menu ---------- */
+  var burger = document.querySelector(".nav-burger");
+  if(burger){
+    burger.addEventListener("click", function(){ nav.classList.toggle("open"); });
+    document.querySelectorAll(".nav-links a").forEach(function(a){
+      a.addEventListener("click", function(){ nav.classList.remove("open"); });
+    });
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }});
+  }, {threshold:0.12, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+  /* ---------- magnetic buttons ---------- */
+  if(!reduce){
+    document.querySelectorAll(".btn-primary, .btn-lg").forEach(function(btn){
+      btn.addEventListener("pointermove", function(e){
+        var r = btn.getBoundingClientRect();
+        var mx = e.clientX - r.left - r.width/2;
+        var my = e.clientY - r.top - r.height/2;
+        btn.style.transform = "translate("+(mx*0.18)+"px,"+(my*0.3)+"px)";
+      });
+      btn.addEventListener("pointerleave", function(){ btn.style.transform=""; });
+    });
+  }
+
+  /* ---------- animated counters ---------- */
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute("data-count"));
+    var dec = parseInt(el.getAttribute("data-dec")||"0",10);
+    var suffix = el.getAttribute("data-suffix")||"";
+    var dur = 1500, start = null;
+    function frame(t){
+      if(!start) start = t;
+      var p = Math.min((t-start)/dur, 1);
+      var eased = 1 - Math.pow(1-p, 3);
+      var val = target*eased;
+      el.textContent = (dec? val.toFixed(dec) : Math.round(val).toLocaleString()) + suffix;
+      if(p<1) requestAnimationFrame(frame); else el.textContent = (dec? target.toFixed(dec): Math.round(target).toLocaleString()) + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ animateCount(en.target); cio.unobserve(en.target); }});
+  }, {threshold:0.6});
+  document.querySelectorAll("[data-count]").forEach(function(el){ if(reduce){ var d=parseInt(el.getAttribute("data-dec")||"0",10),t=parseFloat(el.getAttribute("data-count")); el.textContent=(d?t.toFixed(d):Math.round(t).toLocaleString())+(el.getAttribute("data-suffix")||""); } else cio.observe(el); });
+
+  /* ---------- marquee (industries) ---------- */
+  var industries = ["Local services","Home services","Clinics & wellness","Dental","Med spa","E-commerce","Agencies","Coaches","Creators","Real estate","Law firms","Fitness","Auto","Hospitality"];
+  var track = document.getElementById("marquee");
+  if(track){
+    var html = industries.map(function(n){ return '<span class="logo-item"><span class="gem"><i></i></span>'+n+'</span>'; }).join("");
+    track.innerHTML = "<div style='display:flex;gap:56px'>"+html+"</div><div style='display:flex;gap:56px'>"+html+"</div>";
+  }
+
+  /* ---------- industries tabs ---------- */
+  var tabs = document.querySelectorAll(".uc-tab");
+  var panels = document.querySelectorAll(".uc-panel");
+  tabs.forEach(function(tab){
+    tab.addEventListener("click", function(){
+      var i = +tab.getAttribute("data-uc");
+      tabs.forEach(function(t){ t.classList.remove("active"); });
+      panels.forEach(function(p){ p.classList.remove("active"); });
+      tab.classList.add("active");
+      panels[i].classList.add("active");
+    });
+  });
+
+  /* ---------- HERO agent-network canvas ---------- */
+  (function(){
+    var canvas = document.getElementById("hero-canvas");
+    if(!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var DPR = Math.min(window.devicePixelRatio||1, 2);
+    var W,H,nodes=[],pulses=[],mouse={x:-999,y:-999};
+    var COUNT = window.innerWidth<700 ? 26 : 52;
+    var LINK = 150;
+    function resize(){
+      var hero = canvas.parentElement;
+      W = hero.offsetWidth; H = hero.offsetHeight;
+      canvas.width = W*DPR; canvas.height = H*DPR;
+      canvas.style.width=W+"px"; canvas.style.height=H+"px";
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    function rand(a,b){ return a+Math.random()*(b-a); }
+    function init(){
+      nodes=[];
+      for(var i=0;i<COUNT;i++){
+        nodes.push({x:rand(0,W),y:rand(0,H),vx:rand(-.25,.25),vy:rand(-.25,.25),r:rand(1.2,2.6),h:Math.random()<.5?"124,92,255":"0,229,255"});
+      }
+    }
+    resize(); init();
+    window.addEventListener("resize", function(){ resize(); init(); });
+    canvas.parentElement.addEventListener("pointermove", function(e){
+      var r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    });
+    canvas.parentElement.addEventListener("pointerleave", function(){ mouse.x=-999; mouse.y=-999; });
+
+    function spawnPulse(a,b){ pulses.push({a:a,b:b,t:0,sp:rand(.006,.014),h:b.h}); }
+    var pulseTimer=0;
+    function step(){
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<nodes.length;i++){
+        var a=nodes[i];
+        a.x+=a.vx; a.y+=a.vy;
+        if(a.x<0||a.x>W) a.vx*=-1;
+        if(a.y<0||a.y>H) a.vy*=-1;
+        var dmx=mouse.x-a.x, dmy=mouse.y-a.y, dm=Math.hypot(dmx,dmy);
+        if(dm<170){ a.x+=dmx/dm*0.4; a.y+=dmy/dm*0.4; }
+        for(var j=i+1;j<nodes.length;j++){
+          var b=nodes[j], dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
+          if(d<LINK){
+            var o=(1-d/LINK)*0.5;
+            ctx.strokeStyle="rgba(124,92,255,"+o*0.6+")";
+            ctx.lineWidth=0.6;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+          }
+        }
+        if(dm<170){
+          ctx.strokeStyle="rgba(0,229,255,"+(1-dm/170)*0.5+")";
+          ctx.lineWidth=0.7;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
+        }
+      }
+      for(var k=0;k<nodes.length;k++){
+        var n=nodes[k];
+        ctx.beginPath();
+        ctx.fillStyle="rgba("+n.h+",0.9)";
+        ctx.shadowColor="rgba("+n.h+",0.9)"; ctx.shadowBlur=8;
+        ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+        ctx.shadowBlur=0;
+      }
+      pulseTimer++;
+      if(pulseTimer>26){ pulseTimer=0; var a=nodes[(Math.random()*nodes.length)|0], b=nodes[(Math.random()*nodes.length)|0]; if(a!==b && Math.hypot(a.x-b.x,a.y-b.y)<LINK*1.6) spawnPulse(a,b); }
+      for(var p=pulses.length-1;p>=0;p--){
+        var pl=pulses[p]; pl.t+=pl.sp;
+        if(pl.t>=1){ pulses.splice(p,1); continue; }
+        var px=pl.a.x+(pl.b.x-pl.a.x)*pl.t, py=pl.a.y+(pl.b.y-pl.a.y)*pl.t;
+        ctx.beginPath(); ctx.fillStyle="rgba("+pl.h+",1)";
+        ctx.shadowColor="rgba("+pl.h+",1)"; ctx.shadowBlur=12;
+        ctx.arc(px,py,2,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
+      }
+      raf=requestAnimationFrame(step);
+    }
+    var raf;
+    if(!reduce) raf=requestAnimationFrame(step);
+    else { step(); cancelAnimationFrame(raf); }
+  })();
+
+  /* ---------- CASTYL live conversation demo ---------- */
+  (function(){
+    var chips = document.getElementById("demo-chips");
+    var convo = document.getElementById("convo");
+    var outcome = document.getElementById("outcome");
+    var oTitle = document.getElementById("outcome-title");
+    var oSub = document.getElementById("outcome-sub");
+    var barTitle = document.getElementById("demo-bar-title");
+    if(!chips || !convo) return;
+    var running=false, autoPlayed=false;
+
+    var S = {
+      missed:{ bar:"castyl · sms · BrightAir Heating & Cooling", thread:[
+        {t:"sys",meta:"Missed call · 7:42 PM",x:"Missed call from a new number — Castyl follows up automatically."},
+        {t:"out",meta:"Castyl AI",x:"Hi, this is Sarah at BrightAir Heating & Cooling 👋 So sorry we missed your call! How can I help?"},
+        {t:"in",meta:"New lead",x:"My AC just died and it's 95° out. Can someone come today?"},
+        {t:"out",meta:"Castyl AI",x:"Oh no — let's get you cooled down fast. I have a technician free today 2–4 PM or 4–6 PM. Which works better?"},
+        {t:"in",meta:"New lead",x:"4–6 please"},
+        {t:"out",meta:"Castyl AI",x:"You're booked for 4–6 PM today ✅ I'll text a reminder an hour before. You're all set!"}
+      ], o:["Job booked — from a call you'd have missed.","Recovered in seconds, before they called a competitor."]},
+      lead:{ bar:"castyl · web · Summit Roofing", thread:[
+        {t:"sys",meta:"Website form · just now",x:"New lead: Mia — requested a free roof inspection."},
+        {t:"out",meta:"Castyl AI",x:"Hi Mia! Thanks for reaching out about a roof inspection 🏠 I can get you a free quote this week — what's the property address?"},
+        {t:"in",meta:"Mia",x:"12 Oak St. Thursday morning if possible?"},
+        {t:"out",meta:"Castyl AI",x:"Perfect — Thursday 9 AM at 12 Oak St is booked ✅ I've texted you the details and your inspector's name."}
+      ], o:["Lead qualified & booked in under 60 seconds.","No form left sitting in an inbox for hours."]},
+      after:{ bar:"castyl · call · Sparkle Home Cleaning", thread:[
+        {t:"sys",meta:"Inbound call · 9:48 PM",x:"After-hours call — the office is closed. Castyl answers."},
+        {t:"in",meta:"Caller",x:"Hi, do you have any availability for a cleaning this weekend?"},
+        {t:"out",meta:"Castyl AI",x:"We do! We're closed right now, but I can still book you. Saturday 10 AM or Sunday 1 PM are open — which suits you?"},
+        {t:"in",meta:"Caller",x:"Saturday 10 works"},
+        {t:"out",meta:"Castyl AI",x:"Done ✅ Saturday 10 AM cleaning is booked. You'll get a confirmation text now. See you then!"}
+      ], o:["Booked at 9:48 PM — long after hours.","Every call answered, even when you can't pick up."]},
+      review:{ bar:"castyl · sms · Glow Med Spa", thread:[
+        {t:"sys",meta:"Job complete · 2:15 PM",x:"Appointment finished for Dave R. — Castyl requests a review."},
+        {t:"out",meta:"Castyl AI",x:"Hi Dave, thanks for visiting Glow today! 💙 If you have 20 seconds, a quick Google review really helps us out: [link]"},
+        {t:"in",meta:"Dave",x:"Just left 5 stars ⭐⭐⭐⭐⭐"},
+        {t:"out",meta:"Castyl AI",x:"You're the best — thank you so much! See you next time."}
+      ], o:["Another 5★ review — automatically.","More reviews → higher ranking → more calls."]}
+    };
+
+    function sleep(ms){ return new Promise(function(r){ setTimeout(r, reduce?Math.min(ms,90):ms); }); }
+    function addBubble(cls){ var b=document.createElement("div"); b.className="bubble "+cls; convo.appendChild(b); return b; }
+
+    async function stream(el, text){
+      el.textContent="";
+      if(reduce){ el.textContent=text; return; }
+      var cur=document.createElement("span"); cur.className="cur"; el.appendChild(cur);
+      for(var i=0;i<text.length;i++){
+        cur.insertAdjacentText("beforebegin", text[i]);
+        if(text[i] !== " ") await sleep(text[i]==="."||text[i]===","||text[i]==="!"||text[i]==="?"?22:10);
+      }
+      cur.remove();
+    }
+
+    async function play(key){
+      if(running) return; running=true;
+      Array.prototype.forEach.call(chips.children, function(c){ c.classList.toggle("active", c.getAttribute("data-scn")===key); });
+      var sc = S[key]; if(!sc){ running=false; return; }
+      barTitle.textContent = sc.bar;
+      outcome.classList.remove("show");
+      convo.innerHTML="";
+      for(var i=0;i<sc.thread.length;i++){
+        var m = sc.thread[i];
+        if(m.t==="out"){
+          var b = addBubble("out");
+          var meta = document.createElement("span"); meta.className="meta"; meta.textContent=m.meta;
+          var typ = document.createElement("span"); typ.className="typing"; typ.innerHTML="<i></i><i></i><i></i>";
+          b.appendChild(meta); b.appendChild(typ);
+          await sleep(820);
+          typ.remove();
+          var txt = document.createElement("span"); b.appendChild(txt);
+          await stream(txt, m.x);
+        } else {
+          var bb = addBubble(m.t==="sys"?"sys":"in");
+          var meta2 = document.createElement("span"); meta2.className="meta"; meta2.textContent=m.meta;
+          bb.appendChild(meta2); bb.appendChild(document.createTextNode(m.x));
+          await sleep(m.t==="sys"?760:600);
+        }
+      }
+      oTitle.textContent = sc.o[0]; oSub.textContent = sc.o[1];
+      outcome.classList.add("show");
+      running=false;
+    }
+
+    chips.addEventListener("click", function(e){ var c=e.target.closest(".chip"); if(!c) return; play(c.getAttribute("data-scn")); });
+
+    var demoSec = document.getElementById("demo");
+    if(demoSec){
+      var dio = new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting && !autoPlayed){ autoPlayed=true; play("missed"); dio.disconnect(); }}); }, {threshold:0.4});
+      dio.observe(demoSec);
+    }
+  })();
+
+})();
+</script>
+</body>
+</html>
