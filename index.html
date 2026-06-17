@@ -20,6 +20,48 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://castyl.ai/#org",
+      "name": "Castyl",
+      "url": "https://castyl.ai/",
+      "logo": "https://castyl.ai/assets/og-image.png",
+      "description": "Castyl is a done-for-you AI services agency. We build and run AI receptionists, missed-call text-back, websites, AI chat, review automation, and lead follow-up for growing businesses.",
+      "email": "nikita@castyl.ai"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://castyl.ai/#website",
+      "url": "https://castyl.ai/",
+      "name": "Castyl",
+      "publisher": { "@id": "https://castyl.ai/#org" }
+    },
+    {
+      "@type": "Service",
+      "name": "Done-for-you AI receptionist & business automation",
+      "provider": { "@id": "https://castyl.ai/#org" },
+      "serviceType": "AI receptionist, missed-call text-back, websites, review automation, lead follow-up",
+      "areaServed": "US",
+      "description": "We set up and run the AI that answers every call, replies to leads in seconds, and books more work — fully managed for you."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much does Castyl cost?", "acceptedAnswer": { "@type": "Answer", "text": "Pricing depends on the package and how many lines or locations you run, so we set it on a short call — no surprise fees and no long lock-in. Most owners cover it from the jobs we recover in the first few weeks." } },
+        { "@type": "Question", "name": "How fast can we go live?", "acceptedAnswer": { "@type": "Answer", "text": "Days, not months. A typical setup is live within about a week — we do the heavy lifting and connect everything to your existing phone, website, and CRM." } },
+        { "@type": "Question", "name": "Do I need to be technical, or change my phone number?", "acceptedAnswer": { "@type": "Answer", "text": "No. It is fully done-for-you and works with your existing number and tools. Zero lift on your side." } },
+        { "@type": "Question", "name": "Is there a long contract?", "acceptedAnswer": { "@type": "Answer", "text": "No long lock-in — plans are month-to-month and you can cancel anytime. We earn the relationship by booking you more work." } },
+        { "@type": "Question", "name": "Will customers know it's AI? Will it sound robotic?", "acceptedAnswer": { "@type": "Answer", "text": "It uses a natural voice, is trained on your business, handles real back-and-forth, and hands off to a human whenever it should. Most callers simply feel like they reached a helpful front desk." } },
+        { "@type": "Question", "name": "Is my data secure?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your data stays yours — we use secure, reputable platforms, never sell your data, and only use it to run your service." } }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 /* ============================== TOKENS ============================== */
 :root{
@@ -367,6 +409,55 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
 .rocket .tip{position:absolute;right:50px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:"JetBrains Mono";font-size:10px;letter-spacing:.04em;color:var(--muted);background:rgba(8,9,14,.82);border:1px solid var(--hairline);border-radius:7px;padding:4px 9px;opacity:0;transition:opacity .25s;pointer-events:none}
 .rocket:hover .tip{opacity:1}
 @media(max-width:760px){.rocket-wrap{display:none}}
+
+/* ===== ROI / missed-revenue calculator ===== */
+.roi{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:980px;margin:0 auto}
+@media(max-width:860px){.roi{grid-template-columns:1fr}}
+.roi-inputs{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:30px 28px;display:flex;flex-direction:column;gap:25px}
+.roi-field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:var(--muted);font-weight:500;margin-bottom:13px}
+.roi-field label b{font-family:'Space Grotesk',sans-serif;font-size:19px;color:var(--ink);font-weight:600}
+.roi-field input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background-color:rgba(255,255,255,.09);background-image:linear-gradient(90deg,var(--violet),var(--cyan));background-repeat:no-repeat;background-size:var(--fill,40%) 100%;cursor:pointer}
+.roi-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--cyan);box-shadow:0 0 0 4px rgba(0,229,255,.18),0 2px 8px rgba(0,0,0,.45);cursor:pointer;transition:transform .15s}
+.roi-field input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.14)}
+.roi-field input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--cyan);cursor:pointer}
+.roi-assure{font-size:12.5px;color:var(--muted-2);line-height:1.5}
+.roi-result{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:34px 30px;background:linear-gradient(160deg,rgba(255,92,170,.11),rgba(124,92,255,.08) 55%,rgba(0,229,255,.06));border:1px solid var(--hairline-strong);display:flex;flex-direction:column}
+.roi-label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.roi-big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,7vw,64px);line-height:1.02;letter-spacing:-.02em;margin:7px 0 6px;background:linear-gradient(120deg,#FF8FBE,#FF5CAA);-webkit-background-clip:text;background-clip:text;color:transparent}
+.roi-sub{font-size:15px;color:var(--muted)}
+.roi-sub b{color:var(--ink);font-weight:600}
+.roi-recover{margin:20px 0 22px;padding:14px 16px;border-radius:13px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.18);font-size:14px;color:var(--muted);line-height:1.5;display:flex;gap:10px;align-items:flex-start}
+.roi-recover b{color:var(--cyan);font-weight:600}
+.roi-recover-dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.roi-cta{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+
+/* ===== FAQ accordion ===== */
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--surface);border:1px solid var(--hairline);border-radius:14px;overflow:hidden;transition:border-color .3s,background .3s}
+.faq-item[open]{border-color:var(--hairline-strong);background:var(--elevated)}
+.faq-item summary{list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:500;color:var(--ink)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-ic{flex:none;position:relative;width:18px;height:18px}
+.faq-ic::before,.faq-ic::after{content:"";position:absolute;background:var(--cyan);border-radius:2px;transition:transform .3s var(--ease),opacity .3s}
+.faq-ic::before{top:8px;left:0;width:18px;height:2px}
+.faq-ic::after{top:0;left:8px;width:2px;height:18px}
+.faq-item[open] .faq-ic::after{transform:rotate(90deg);opacity:0}
+.faq-a{padding:0 22px 20px;color:var(--muted);font-size:14.5px;line-height:1.65}
+
+/* ===== guarantee strip ===== */
+.cta-assure{display:flex;flex-wrap:wrap;justify-content:center;gap:11px 22px;margin-top:26px}
+.cta-assure span{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--muted);font-weight:500}
+.cta-assure svg{width:15px;height:15px;flex:none}
+
+/* ===== sticky mobile CTA ===== */
+.mcta{display:none}
+@media(max-width:760px){
+  .mcta{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:120;padding:11px 13px calc(11px + env(safe-area-inset-bottom));background:rgba(8,9,14,.88);backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);border-top:1px solid var(--hairline);transform:translateY(130%);transition:transform .4s var(--ease)}
+  .mcta.show{transform:none}
+  .mcta a{flex:1;display:inline-flex;align-items:center;justify-content:center;padding:13px;border-radius:11px;font-weight:600;font-size:14.5px}
+  .mcta-ghost{border:1px solid var(--hairline-strong);color:var(--ink)}
+  .mcta-primary{background:var(--grad);color:#06070A}
+}
 </style>
 </head>
 <body>
@@ -427,7 +518,7 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
       <a href="careers/">Careers</a>
     </div>
     <div class="nav-cta">
-      <a href="#" class="btn btn-ghost">Client login</a>
+      <a href="#roi" class="btn btn-ghost">Calculate ROI</a>
       <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a call <span class="arr">→</span></a>
       <button class="nav-burger" aria-label="Menu"><span></span></button>
     </div>
@@ -675,7 +766,7 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
 </section>
 
 <!-- ============ TESTIMONIALS ============ -->
-<section class="pad" style="padding-top:0">
+<section class="pad" id="results" style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal" style="text-align:center;margin:0 auto 50px;max-width:560px">
       <span class="eyebrow"><span class="dot"></span> Real results</span>
@@ -685,6 +776,47 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
       <div class="quote reveal"><div class="stars">★★★★★</div><p>"We stopped missing calls overnight. Castyl booked 14 extra jobs in our first month — straight from calls we used to lose to voicemail."</p><div class="by"><span class="ava">MT</span><div><b>Marcus Tate</b><span>Owner, Tate Heating &amp; Air</span></div></div></div>
       <div class="quote reveal d1"><div class="stars">★★★★★</div><p>"The missed-call text-back alone paid for the whole system in week one. Patients book themselves now, even after hours."</p><div class="by"><span class="ava">LP</span><div><b>Dr. Lena Park</b><span>Bright Smile Dental</span></div></div></div>
       <div class="quote reveal d2"><div class="stars">★★★★★</div><p>"Our Google reviews went from 38 to 190 in three months. We rank #1 locally now and the phone hasn't stopped."</p><div class="by"><span class="ava">PN</span><div><b>Priya Nair</b><span>Glow Med Spa</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROI CALCULATOR ============ -->
+<section class="pad" id="roi" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 48px;max-width:640px">
+      <span class="eyebrow"><span class="dot"></span> Revenue calculator</span>
+      <h2>How much are missed calls <span class="gtext-tri">costing you</span>?</h2>
+      <p>Most owners lose more to voicemail than they realize. Move the sliders to see your number — then how much Castyl wins back.</p>
+    </div>
+    <div class="roi reveal d1">
+      <div class="roi-inputs">
+        <div class="roi-field">
+          <label>Calls you miss per week <b id="roi-calls-v">12</b></label>
+          <input type="range" id="roi-calls" min="1" max="80" value="12" step="1" aria-label="Calls missed per week">
+        </div>
+        <div class="roi-field">
+          <label>Average value of a customer <b id="roi-val-v">$400</b></label>
+          <input type="range" id="roi-val" min="50" max="5000" value="400" step="50" aria-label="Average customer value">
+        </div>
+        <div class="roi-field">
+          <label>Of those, % who would buy <b id="roi-conv-v">35%</b></label>
+          <input type="range" id="roi-conv" min="5" max="70" value="35" step="5" aria-label="Percent of missed callers who would buy">
+        </div>
+        <div class="roi-assure">Ballpark estimate — your real numbers and recovery rate get dialed in on a quick call.</div>
+      </div>
+      <div class="roi-result">
+        <span class="roi-label">You're leaving on the table</span>
+        <div class="roi-big" id="roi-year">$0</div>
+        <div class="roi-sub">about <b id="roi-month">$0</b> every month in lost revenue</div>
+        <div class="roi-recover">
+          <span class="roi-recover-dot"></span>
+          <span>Castyl could recover <b id="roi-rec">$0</b>/yr by answering and texting back every missed call.</span>
+        </div>
+        <div class="roi-cta">
+          <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="width:100%">Book a call to recover this <span class="arr">→</span></a>
+          <a href="mailto:nikita@castyl.ai" id="roi-email" class="btn btn-ghost" style="width:100%">Email me my numbers</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -740,6 +872,43 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
   </div>
 </section>
 
+<!-- ============ FAQ ============ -->
+<section class="pad" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 48px;max-width:600px">
+      <span class="eyebrow"><span class="dot"></span> FAQ</span>
+      <h2>Questions, <span class="gtext">answered</span>.</h2>
+      <p>Everything owners ask before they start. Still curious? Book a call — no pressure.</p>
+    </div>
+    <div class="faq reveal d1">
+      <details class="faq-item">
+        <summary>How much does Castyl cost?<span class="faq-ic"></span></summary>
+        <div class="faq-a">Pricing depends on the package and how many lines or locations you run, so we set it on a short call — no surprise fees and no long lock-in. Most owners cover it from the jobs we recover in the first few weeks.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How fast can we go live?<span class="faq-ic"></span></summary>
+        <div class="faq-a">Days, not months. A typical setup is live within about a week — we do the heavy lifting and connect everything to your existing phone, website, and CRM.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need to be technical, or change my phone number?<span class="faq-ic"></span></summary>
+        <div class="faq-a">No. It's fully done-for-you and works with your existing number and tools. Zero lift on your side — we set it up, run it, and tune it.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a long contract?<span class="faq-ic"></span></summary>
+        <div class="faq-a">No long lock-in — plans are month-to-month and you can cancel anytime. We earn the relationship by booking you more work, month after month.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Will customers know it's AI? Will it sound robotic?<span class="faq-ic"></span></summary>
+        <div class="faq-a">It uses a natural voice, is trained on your business, handles real back-and-forth, and hands off to a human whenever it should. Most callers simply feel like they reached a helpful front desk.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is my data secure?<span class="faq-ic"></span></summary>
+        <div class="faq-a">Yes. Your data stays yours — we use secure, reputable platforms, never sell your data, and only use it to run your service.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CTA ============ -->
 <section class="pad" id="book" style="padding-top:0">
   <div class="wrap">
@@ -750,6 +919,12 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
       <div class="hero-actions">
         <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Book a call <span class="arr">→</span></a>
         <a href="#packages" class="btn btn-ghost btn-lg">See packages</a>
+      </div>
+      <div class="cta-assure">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Done-for-you setup</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Live in days, not months</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No long contracts</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Keep your own number</span>
       </div>
     </div>
   </div>
@@ -799,7 +974,7 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
       </div>
       <div class="foot-col"><h5>Services</h5><a href="#services">AI Receptionist</a><a href="#services">Missed-Call Text-Back</a><a href="#services">Website + AI Chat</a><a href="#services">Reviews on Autopilot</a><a href="#services">Automation</a></div>
       <div class="foot-col"><h5>Company</h5><a href="#industries">Who it's for</a><a href="#how">How it works</a><a href="#packages">Packages</a><a href="careers/">Careers</a><a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener">Book a call</a></div>
-      <div class="foot-col"><h5>Resources</h5><a href="#">Case studies</a><a href="#">ROI calculator</a><a href="#">FAQ</a><a href="#">Contact</a></div>
+      <div class="foot-col"><h5>Resources</h5><a href="#results">Results</a><a href="#roi">ROI calculator</a><a href="#faq">FAQ</a><a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener">Contact</a></div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Castyl. All rights reserved.</span>
@@ -807,6 +982,12 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
     </div>
   </div>
 </footer>
+
+<!-- sticky mobile CTA -->
+<div class="mcta" id="mcta">
+  <a href="#roi" class="mcta-ghost">Calculate my loss</a>
+  <a href="https://calendly.com/idan-castyl/30min" target="_blank" rel="noopener" class="mcta-primary">Book a call →</a>
+</div>
 
 <script>
 (function(){
@@ -1113,6 +1294,49 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
   window.addEventListener("resize",place);
   rocket.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});
   place();
+})();
+</script>
+
+<script>
+/* ===== ROI / missed-revenue calculator ===== */
+(function(){
+  var calls=document.getElementById("roi-calls"), val=document.getElementById("roi-val"), conv=document.getElementById("roi-conv");
+  if(!calls||!val||!conv) return;
+  var callsV=document.getElementById("roi-calls-v"), valV=document.getElementById("roi-val-v"), convV=document.getElementById("roi-conv-v"),
+      yearEl=document.getElementById("roi-year"), monthEl=document.getElementById("roi-month"), recEl=document.getElementById("roi-rec"),
+      emailBtn=document.getElementById("roi-email");
+  var RECOVER=0.6, WEEKS=4.33;
+  function money(n){ return "$"+Math.round(n).toLocaleString("en-US"); }
+  function fill(el){ var min=+el.min,max=+el.max; el.style.setProperty("--fill",((+el.value-min)/(max-min))*100+"%"); }
+  function calc(){
+    var c=+calls.value, v=+val.value, p=+conv.value/100;
+    var month=c*WEEKS*p*v, year=month*12, rec=year*RECOVER;
+    callsV.textContent=c; valV.textContent=money(v); convV.textContent=conv.value+"%";
+    yearEl.textContent=money(year); monthEl.textContent=money(month); recEl.textContent=money(rec);
+    [calls,val,conv].forEach(fill);
+    var body="Hi Nikita,\n\nI ran the Castyl revenue calculator and here are my numbers:\n\n"+
+      "- Missed calls per week: "+c+"\n- Average customer value: "+money(v)+"\n- Estimated buyers among missed calls: "+conv.value+"%\n\n"+
+      "=> Estimated lost revenue: "+money(month)+"/month ("+money(year)+"/year)\n"+
+      "=> Recoverable with Castyl (~60%): "+money(rec)+"/year\n\n"+
+      "I'd like to see how you'd win this back for my business.\n\n- Business name:\n- Website:\n- Best number / time to reach me:\n\nThanks!\n";
+    emailBtn.setAttribute("href","mailto:nikita@castyl.ai?subject="+encodeURIComponent("My missed-revenue numbers — "+money(year)+"/yr")+"&body="+encodeURIComponent(body));
+  }
+  [calls,val,conv].forEach(function(el){ el.addEventListener("input",calc); });
+  calc();
+})();
+
+/* ===== sticky mobile CTA ===== */
+(function(){
+  var bar=document.getElementById("mcta"); if(!bar) return;
+  var foot=document.querySelector("footer");
+  function upd(){
+    var y=window.scrollY||document.documentElement.scrollTop||0;
+    var nearFoot=foot&&(foot.getBoundingClientRect().top<window.innerHeight+40);
+    if(y>620&&!nearFoot) bar.classList.add("show"); else bar.classList.remove("show");
+  }
+  window.addEventListener("scroll",upd,{passive:true});
+  window.addEventListener("resize",upd);
+  upd();
 })();
 </script>
 </body>
