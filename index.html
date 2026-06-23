@@ -156,7 +156,10 @@ section{position:relative;z-index:2}
 
 /* ============================== HERO ============================== */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:80px;overflow:hidden}
-#hero-canvas{position:absolute;inset:0;z-index:0;opacity:.9}
+.hero-bg{position:absolute;inset:-4% -2%;z-index:0;background:url("assets/hero-bg.jpg") center/cover no-repeat;opacity:.7;animation:heroKen 34s ease-in-out infinite alternate;will-change:transform}
+.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 90% at 50% 34%,rgba(6,7,10,.16) 0%,rgba(6,7,10,.5) 48%,rgba(6,7,10,.9) 100%),linear-gradient(180deg,rgba(6,7,10,.55) 0%,transparent 24%,transparent 48%,rgba(6,7,10,.97) 100%)}
+@keyframes heroKen{0%{transform:scale(1.05) translate3d(-1.4%,-1%,0)}100%{transform:scale(1.16) translate3d(1.4%,1.3%,0)}}
+#hero-canvas{position:absolute;inset:0;z-index:0;opacity:.8}
 .hero-aurora{position:absolute;z-index:0;pointer-events:none;filter:blur(60px);border-radius:50%}
 .aur-1{width:620px;height:620px;top:-180px;right:-120px;background:radial-gradient(circle,rgba(124,92,255,.5),transparent 70%)}
 .aur-2{width:520px;height:520px;bottom:-200px;left:-140px;background:radial-gradient(circle,rgba(0,229,255,.35),transparent 70%)}
@@ -529,6 +532,7 @@ footer{border-top:1px solid var(--hairline);margin-top:clamp(80px,11vw,140px);pa
 
 <!-- ============ HERO ============ -->
 <header class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
   <canvas id="hero-canvas"></canvas>
   <div class="hero-grid"></div>
   <div class="hero-aurora aur-1"></div>
